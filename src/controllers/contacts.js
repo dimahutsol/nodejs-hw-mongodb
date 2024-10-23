@@ -3,7 +3,14 @@ import createHttpError from 'http-errors';
 import * as contactServices from '../services/contacts.js';
 
 export const getContactsController = async (req, res) => {
-  const data = await contactServices.getContacts();
+  const { page, perPage, sortBy, sortOrder } = req.query;
+
+  const data = await contactServices.getContacts({
+    page,
+    perPage,
+    sortBy,
+    sortOrder,
+  });
 
   res.json({
     status: 200,
