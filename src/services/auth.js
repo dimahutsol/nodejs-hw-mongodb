@@ -53,8 +53,8 @@ export const login = async payload => {
   const newSession = createSession();
 
   return await SessionCollection.create({
-    userId: user._id,
     ...newSession,
+    userId: user._id,
   });
 };
 
@@ -76,8 +76,8 @@ export const refreshSession = async ({ sessionId, refreshToken }) => {
   const newSession = createSession();
 
   return await SessionCollection.create({
-    userId: oldSession.userId,
     ...newSession,
+    userId: oldSession.userId,
   });
 };
 
