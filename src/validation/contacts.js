@@ -1,6 +1,7 @@
 import Joi from 'joi';
 
-import { typeList, phoneNumberRegex } from '../constants/contacts.js';
+import { typeList, phoneNumberRegexp } from '../constants/contacts.js';
+import { emailRegexp } from '../constants/users.js';
 
 export const contactAddSchema = Joi.object({
   name: Joi.string().min(3).max(20).required().messages({
@@ -12,7 +13,7 @@ export const contactAddSchema = Joi.object({
   phoneNumber: Joi.string()
     .min(3)
     .max(20)
-    .pattern(phoneNumberRegex)
+    .pattern(phoneNumberRegexp)
     .required()
     .messages({
       'string.base': 'Phone number should be a string',
@@ -20,7 +21,7 @@ export const contactAddSchema = Joi.object({
       'string.max': 'Phone number should have at most {#limit} characters',
       'any.required': 'Phone number is required',
     }),
-  email: Joi.string().email(),
+  email: Joi.string().email().pattern(emailRegexp),
   isFavourite: Joi.boolean(),
   contactType: Joi.string()
     .valid(...typeList)
@@ -34,13 +35,13 @@ export const contactUpdateSchema = Joi.object({
     'string.max': 'Username should have at most {#limit} characters',
     'any.required': 'Username is required',
   }),
-  phoneNumber: Joi.string().min(3).max(20).messages({
+  phoneNumber: Joi.string().min(3).max(20).pattern(phoneNumberRegexp).messages({
     'string.base': 'Phone number should be a string',
     'string.min': 'Phone number should have at least {#limit} characters',
     'string.max': 'Phone number should have at most {#limit} characters',
     'any.required': 'Phone number is required',
   }),
-  email: Joi.string(),
+  email: Joi.string().email().pattern(emailRegexp),
   isFavourite: Joi.boolean(),
   contactType: Joi.string().valid(...typeList),
 });

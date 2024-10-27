@@ -5,6 +5,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../utils/validateBody.js';
 import { parsePaginationParams } from '../middlewares/parsePaginationParams.js';
+import { authenticate } from '../middlewares/authenticate.js';
 import { parseSortParamsDecorator } from '../utils/parseSortParamsDecorator.js';
 import { sortByListContact } from '../db/models/Contact.js';
 import {
@@ -13,6 +14,8 @@ import {
 } from '../validation/contacts.js';
 
 const contactsRouter = Router();
+
+contactsRouter.use(authenticate);
 
 contactsRouter.get(
   '/',
