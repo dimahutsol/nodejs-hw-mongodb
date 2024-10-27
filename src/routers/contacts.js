@@ -35,18 +35,21 @@ contactsRouter.post(
 
 contactsRouter.put(
   '/:id',
+  isValidId,
   validateBody(contactAddSchema),
   ctrlWrapper(contactControllers.upsertContactController)
 );
 
 contactsRouter.patch(
   '/:id',
+  isValidId,
   validateBody(contactUpdateSchema),
   ctrlWrapper(contactControllers.patchContactController)
 );
 
 contactsRouter.delete(
   '/:id',
+  isValidId,
   ctrlWrapper(contactControllers.deleteContactController)
 );
 
