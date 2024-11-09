@@ -26,6 +26,7 @@ export const contactAddSchema = Joi.object({
   contactType: Joi.string()
     .valid(...typeList)
     .required(),
+  photo: Joi.string(),
 });
 
 export const contactUpdateSchema = Joi.object({
