@@ -13,7 +13,7 @@ import {
   accessTokenLifetime,
   refreshTokenLifetime,
 } from '../constants/users.js';
-import { TEMPLATES_DIR, SMTP } from '../constants/index.js';
+import { TEMPLATES_DIR } from '../constants/index.js';
 
 import { env } from '../utils/env.js';
 import { sendMail } from '../utils/sendEmail.js';
@@ -123,7 +123,7 @@ export const requestResetToken = async email => {
   });
 
   const send = await sendMail({
-    from: env(SMTP.SMTP_FROM),
+    from: env('SMTP_FROM'),
     to: email,
     subject: 'Reset your password',
     html,
